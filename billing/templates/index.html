@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %} 
+{% load static %}
+
+{% block body %}
+
+<input type="text" id="productSearch" placeholder="Search for a product...">
+<div id="dropdown" class="dropdown"></div>
+<input type="text" id="priceField" placeholder="Price" readonly>
+
+<script src="{% static 'js/fetch_stock.js' %}"></script>
+
+
+{% endblock body %}

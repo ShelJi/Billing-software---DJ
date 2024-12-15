@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'assests/clovion.png' %}" type="image/x-icon">
+    <title>Clovion</title>
+</head>
+<body>
+    {% include "base/navbar.html" %}
+    {% block body %}
+    {% endblock body %}
+</body>
+</html>

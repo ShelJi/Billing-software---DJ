@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% block body %}
+
+    {% for object in object_list %}
+    {{ object.product_name }}
+    {{ object.product_description }}
+    {{ object.product_stock }}
+    {{ object.product_prize }}
+    {{ object.product_created_at }}
+    {{ object.product_updated_at }}
+    <br>
+    {% empty %}
+    <h1>No stocks availble</h1>
+    {% endfor %}
+
+
+
+{% endblock body %}
