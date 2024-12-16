@@ -1,13 +1,31 @@
-{% extends 'base/base.html' %} 
-{% load static %}
+{% extends 'base/base.html' %} {% load static %} {% block body %}
 
-{% block body %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
 
-<input type="text" id="productSearch" placeholder="Search for a product...">
-<div id="dropdown" class="dropdown"></div>
-<input type="text" id="priceField" placeholder="Price" readonly>
+<div class="container_body">
+	<div class="logo">
+		<img src="{% static 'assests/c-small-transparent.png' %}" alt="Clovion" height="100px" />
+	</div>
+
+	<div class="details">
+		<div class="user_details">
+			<input type="number" name="phone_no" placeholder="Phone Number" />
+			<input type="text" name="username" placeholder="Username" />
+			<input type="email" name="email" placeholder="Email" />
+			<input type="text" name="address" placeholder="Address" />
+		</div>
+
+		<div class="products">
+			<div class="search">
+				<input type="text" id="productSearch" placeholder="Search for a product..." />
+				<div id="dropdown" class="dropdown"></div>
+			</div>
+		</div>
+	</div>
+
+	<button>Checkout</button>
+</div>
 
 <script src="{% static 'js/fetch_stock.js' %}"></script>
-
 
 {% endblock body %}

@@ -1,0 +1,178 @@
+{% extends 'base/base.html' %} {% load static %} {% block body %} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .invoice-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .invoice-header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #1d3557;
+        }
+
+        .invoice-header p {
+            margin: 5px 0;
+            color: #6c757d;
+        }
+
+        .invoice-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .details-column {
+            width: 45%;
+        }
+
+        .details-column h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: #1d3557;
+        }
+
+        .details-column p {
+            margin: 3px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #f1f3f5;
+            color: #495057;
+        }
+
+        tfoot td {
+            font-weight: bold;
+        }
+
+        .total-row {
+            background-color: #f8f9fa;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <h1>Invoice</h1>
+            <p>Invoice #: INV-001</p>
+            <p>Date: 2024-12-16</p>
+        </div>
+
+        <div class="invoice-details">
+            <div class="details-column">
+                <h3>From:</h3>
+                <p>Company Name</p>
+                <p>123 Business Street</p>
+                <p>City, State, 12345</p>
+                <p>Email: company@example.com</p>
+            </div>
+            <div class="details-column">
+                <h3>To:</h3>
+                <p>Customer Name</p>
+                <p>456 Customer Lane</p>
+                <p>City, State, 67890</p>
+                <p>Email: customer@example.com</p>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Item Description</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Product A</td>
+                    <td>2</td>
+                    <td>$50.00</td>
+                    <td>$100.00</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Product B</td>
+                    <td>1</td>
+                    <td>$75.00</td>
+                    <td>$75.00</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Service C</td>
+                    <td>3</td>
+                    <td>$20.00</td>
+                    <td>$60.00</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr class="total-row">
+                    <td colspan="4">Subtotal</td>
+                    <td>$235.00</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="4">Tax (10%)</td>
+                    <td>$23.50</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="4">Total</td>
+                    <td>$258.50</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="footer">
+            <p>Thank you for your business!</p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+{% endblock body %}

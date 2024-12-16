@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap");
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Reddit Mono", monospace;
+}
+
+img {
+	font-style: italic;
+}
+
+.logo {
+	display: flex;
+	justify-content: center;
+	margin: 30px 0;
+}
+
+.details {
+	margin: 60px 2%;
+}
+
+.user_details {
+	display: flex;
+	justify-content: space-between;
+	gap: 5%;
+}
+
+input {
+	box-shadow: inset #abacaf 0 0 0 2px;
+	border: 0;
+	background: rgba(0, 0, 0, 0);
+	appearance: none;
+	min-width: 100px;
+	width: 100%;
+	border-radius: 7px;
+	padding: 9px 12px;
+	line-height: 1.4;
+	color: rgb(0, 0, 0);
+	font-size: 1rem;
+	font-weight: 400;
+	height: 2.5rem;
+	transition: all 0.2s ease;
+	box-shadow: 0 5px 5px -3px rgb(0 0 0 / 16%), 0 8px 10px 1px rgb(0 0 0 / 11%),
+		0 3px 14px 2px rgb(0 0 0 / 10%);
+}
+
+input::placeholder {
+	font-size: 1rem;
+}
+
+input:focus {
+	box-shadow: 0 0 0 0 #fff inset, #1de9b6 0 0 0 2px;
+	background: #fff;
+	outline: 0;
+}
+
+/* Remove arrows in most browsers */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+.products {
+	margin-top: 2rem;
+}
+
+.products * {
+	margin: 10px 0;
+}
+
+#productSearch {
+	height: 3.5rem;
+	padding-left: 20px;
+	font-size: 1.2rem;
+}
+
+#dropdown div {
+	padding: 10px;
+	cursor: pointer;
+	border-bottom: 1px solid #ddd;
+}
+
+#dropdown div:hover {
+	background-color: #f1f1f1;
+}
+
+button {
+	background: linear-gradient(to bottom right, #1de9b6, #1de949);
+	border: 0;
+	border-radius: 12px;
+	color: #ffffff;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1rem;
+	font-weight: 500;
+	line-height: 2.5;
+	outline: transparent;
+	padding: 0 1rem;
+	text-align: center;
+	text-decoration: none;
+	transition: box-shadow 0.2s ease-in-out;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	white-space: nowrap;
+}
+
+button:not([disabled]):hover {
+	box-shadow: 0 0 0.25rem #1de9b696, -0.125rem -0.125rem 1rem #1de9b696,
+		0.125rem 0.125rem 1rem #1de9b696;
+}

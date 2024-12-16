@@ -1,7 +1,7 @@
 from django.shortcuts import redirect
 from django.http import JsonResponse
 
-from django.views.generic import TemplateView, DetailView, ListView
+from django.views.generic import TemplateView, DetailView, ListView, View
 
 from .models import StocksModel
 
@@ -22,9 +22,26 @@ class StockSearchView(ListView):
         query = self.request.GET.get("query", "")
         if query:
             return StocksModel.objects.filter(product_name__startswith=query).values("product_name", "product_stock", "product_prize")[:10]
-        return StocksModel.objects.all().values("product_name", "product_stock", "product_prize")[:10]
+        return StocksModel.objects.all().values("id", "product_name", "product_stock", "product_prize")[:10]
     
     def render_to_response(self, context, **response_kwargs):
         if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest': 
             return JsonResponse(list(self.get_queryset()), safe=False) 
         return redirect("billing:index")
+    
+class PDFView(TemplateView):
+    template_name = "performa.html"
+    
+    
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
+
+class createpdf(View):
+    def get(self):
+        html_content = render_to_string("pdf.html")
+        pdf_file = HTML(string=html_content).write_pdf()
+        
+        response = HttpResponse(pdf_file, content_type="applcation/pdf")
+        response["Content-Disposition"] = f"inline; filename=invoice.pdf"
+        return response
