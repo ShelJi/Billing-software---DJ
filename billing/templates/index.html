@@ -9,23 +9,86 @@
 
 	<div class="details">
 		<div class="user_details">
-			<input type="number" name="phone_no" placeholder="Phone Number" />
-			<input type="text" name="username" placeholder="Username" />
-			<input type="email" name="email" placeholder="Email" />
-			<input type="text" name="address" placeholder="Address" />
+			<label for="phone_no">
+				<input type="tel" pattern="^\+?[0-9]*$" name="phone_no" id="phone_no" placeholder=" " autocomplete="off" />
+				<span>Phone Number</span>
+			</label>
+			<label for="username">
+				<input type="text" name="username" id="username" placeholder=" " />
+				<span>Username</span>
+			</label>
+			<label for="email">
+				<input type="email" name="email" id="email" placeholder=" " />
+				<span>Email</span>
+			</label>
+			<label for="address">
+				<input type="text" name="address" id="address" placeholder=" " />
+				<span>Address</span>
+			</label>
+			<label for="dateField">
+				<input type="date" value="" name="date" id="dateField" placeholder=" " />
+				<span>Date</span>
+			</label>
+			
 		</div>
+		<div id="dropdownuser" class="dropdown"></div>
 
 		<div class="products">
-			<div class="search">
-				<input type="text" id="productSearch" placeholder="Search for a product..." />
+			<div class="search" id="search">
+				<div class="product-inputs">
+					<input type="number" value="" id="productID" name="id" hidden />
+					<input type="text" id="productSearch" placeholder="Search for a product..." />
+					<label for="priceField">
+						<input autocomplete="off" type="text" id="priceField" placeholder=" " />
+						<span>Price</span>
+					</label>
+					<label for="stockField">
+						<input autocomplete="off" type="text" id="stockField" placeholder=" " readonly />
+						<span>Stock</span>
+					</label>
+					<label for="stockCount">
+						<input autocomplete="off" type="text" id="stockCount" placeholder=" " />
+						<span>Count</span>
+					</label>
+					<button type="button" onclick="addItem()">Add item</button>
+				</div>
 				<div id="dropdown" class="dropdown"></div>
 			</div>
 		</div>
 	</div>
-
-	<button>Checkout</button>
+	<div class="cart">
+		<div class="table" id="table">
+			<!-- <table id="cartTable">
+				<thead>
+					<tr>
+						<th>Product Name</th>
+						<th>Price</th>
+						<th>Quantity</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Tomato</td>
+						<td>Rs 100</td>
+						<td>12</td>
+						<td>Rs 1200</td>
+					</tr>
+					<tr>
+						<td>Potato</td>
+						<td>Rs 10</td>
+						<td>28</td>
+						<td>Rs 280</td>
+					</tr>
+				</tbody>
+			</table> -->
+		</div>
+		<button id="checkout">Checkout</button>
+	</div>
 </div>
 
+<script src="{% static 'js/stock_check.js' %}"></script>
+<script src="{% static 'js/fetch_user.js' %}"></script>
 <script src="{% static 'js/fetch_stock.js' %}"></script>
 
 {% endblock body %}

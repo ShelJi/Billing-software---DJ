@@ -1,9 +1,9 @@
 from django.shortcuts import redirect
 from django.http import JsonResponse
 
-from django.views.generic import TemplateView, DetailView, ListView, View
+from django.views.generic import TemplateView, DetailView, ListView, View, CreateView
 
-from .models import StocksModel
+from .models import StocksModel, CustomerModel
 
 
 class IndexView(TemplateView):
@@ -21,27 +21,55 @@ class StockSearchView(ListView):
     def get_queryset(self):
         query = self.request.GET.get("query", "")
         if query:
-            return StocksModel.objects.filter(product_name__startswith=query).values("product_name", "product_stock", "product_prize")[:10]
+            return StocksModel.objects.filter(product_name__icontains=query).values("product_name", "product_stock", "product_prize")[:10]
         return StocksModel.objects.all().values("id", "product_name", "product_stock", "product_prize")[:10]
     
     def render_to_response(self, context, **response_kwargs):
         if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest': 
             return JsonResponse(list(self.get_queryset()), safe=False) 
         return redirect("billing:index")
+  
+# class CreateUser(CreateView):
+#     model = CustomerModel
+ 
+class CustomerSearchView(ListView):
+    model = CustomerModel
+    context_object_name = "customer"
     
-class PDFView(TemplateView):
-    template_name = "performa.html"
+    def get_queryset(self):
+        query = self.request.GET.get("query", "")
+        return CustomerModel.objects.filter(phone_no__icontains=query).values()[:5]
     
-    
-from django.http import HttpResponse
-from django.template.loader import render_to_string
-from weasyprint import HTML
-
-class createpdf(View):
-    def get(self):
-        html_content = render_to_string("pdf.html")
-        pdf_file = HTML(string=html_content).write_pdf()
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            queryset = self.get_queryset()
+            users = [
+                {
+                    "id": user["id"],
+                    "phone_no": f"+{user['phone_no'].country_code}{user['phone_no'].national_number}",
+                    "username": user["username"],
+                    "email": user["email"],
+                    "address": user["address"],
+                }
+                for user in queryset
+            ]
+            return JsonResponse(users, safe=False)
+        return redirect("billing:index")
         
-        response = HttpResponse(pdf_file, content_type="applcation/pdf")
-        response["Content-Disposition"] = f"inline; filename=invoice.pdf"
-        return response
+    
+# class PDFView(TemplateView):
+#     template_name = "performa.html"
+    
+    
+# from django.http import HttpResponse
+# from django.template.loader import render_to_string
+# from weasyprint import HTML
+
+# class createpdf(View):
+#     def get(self):
+#         html_content = render_to_string("pdf.html")
+#         pdf_file = HTML(string=html_content).write_pdf()
+        
+#         response = HttpResponse(pdf_file, content_type="applcation/pdf")
+#         response["Content-Disposition"] = f"inline; filename=invoice.pdf"
+#         return response
