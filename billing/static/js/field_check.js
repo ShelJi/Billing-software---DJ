@@ -6,7 +6,6 @@ const total = document.getElementById("total");
 const priceFieldValue = document.getElementById("priceField");
 const gst = document.getElementById("gst");
 
-
 document.addEventListener("DOMContentLoaded", () => {
 	gst.value = 18;
 });
@@ -41,13 +40,16 @@ priceFieldValue.addEventListener("blur", () => {
 	calcAmounts();
 });
 
-
 function calcAmounts() {
 	let quantity = Number(stockQuantityValue.value);
 	let price = Number(priceFieldValue.value);
+	let gstRateAmt = Number(gst.value);
 
-	let actualAmountRS = (actualAmount.value = quantity * price);
-	let gstAmountRS = (gstRate.value = actualAmountRS * (Number(gst.value) / 100));
+	let actualAmountRS = Number((quantity * price).toFixed(2));
+	let gstAmountRS = Number((actualAmountRS * gstRateAmt / 100).toFixed(2));
+
+	actualAmount.value = actualAmountRS;
+	gstRate.value = gstAmountRS;
 
 	total.value = gstAmountRS + actualAmountRS;
 }
