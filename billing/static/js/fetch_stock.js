@@ -7,22 +7,53 @@ const productID = document.getElementById("productID");
 const table = document.getElementById("table");
 const checkout = document.getElementById("checkout");
 const date = document.getElementById("dateField");
+const actualAmountTable = document.getElementById("actualAmount");
+const gstRateTable = document.getElementById("gstRate");
+const totalTable = document.getElementById("total");
 
 const tableHead = `
 <table id="cartTable">
     <thead>
         <tr>
+            <th>S.No</th>
             <th>Product Name</th>
             <th>Price</th>
             <th>Quantity</th>
+            <th>Actual Amount</th>
+            <th>GST Rate</th>
             <th>Total</th>
             <th>Remove</th>
         </tr>
     </thead>
+
     <tbody>
-        
     </tbody>
+	
+	<tfoot>
+	</tfoot>
 </table>`;
+
+const tableFooter = `
+<tr>
+	<td colspan="7" >Grand Total Quantity</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td colspan="7">Grand Total Amount Without GST (₹)</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td colspan="7">Grand Total GST Amount (₹)</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td colspan="7">Grand Total Amount (₹)</td>
+	<td></td>
+</tr>
+`;
 
 let products = [];
 let cart = [];
@@ -112,8 +143,10 @@ function addItem() {
 			product_name: productName,
 			price: priceField.value.trim(),
 			quantity: stockCount.value.trim(),
+			actualAmount: actualAmountTable.value.trim(),
+			gstRate: gstRateTable.value.trim(),
+			total: totalTable.value.trim(),
 		});
-		clearFields();
 		refreshTable();
 	} else {
 		console.log("Fill all fields");
@@ -127,6 +160,9 @@ function clearFields() {
 	priceField.value = "";
 	stockField.value = "";
 	stockCount.value = "";
+	actualAmount.value = "";
+	gstRate.value = "";
+	total.value = "";
 }
 
 // capitalize name
@@ -149,8 +185,13 @@ function refreshTable() {
 	const cartTableBody = document.querySelector("#cartTable tbody");
 	cartTableBody.innerHTML = "";
 
-	cart.forEach((item) => {
+	cart.slice().reverse().forEach((item, index) => {
 		const row = document.createElement("tr");
+
+		// S.no
+		const slno = document.createElement("td");
+		slno.textContent = cart.length - index;
+		row.appendChild(slno);
 
 		// Product Name
 		const nameCell = document.createElement("td");
@@ -167,23 +208,39 @@ function refreshTable() {
 		quantityCell.textContent = item.quantity;
 		row.appendChild(quantityCell);
 
-		// Total (Price * Quantity)
-		const totalCell = document.createElement("td");
-		totalCell.textContent = `Rs ${item.price * item.quantity}`;
-		row.appendChild(totalCell);
+		// Actual amount
+		const actualAmountCell = document.createElement("td");
+		actualAmountCell.textContent = `Rs ${item.actualAmount}`;
+		row.appendChild(actualAmountCell);
+
+		// gstRateTable
+		const gstRateTableCell = document.createElement("td");
+		gstRateTableCell.textContent = `Rs ${item.gstRate}`;
+		row.appendChild(gstRateTableCell);
+
+		// totalTable
+		const totalTableCell = document.createElement("td");
+		totalTableCell.textContent = `Rs ${item.total}`;
+		row.appendChild(totalTableCell);
 
 		// remove
 		const removeCell = document.createElement("td");
 		const removeButton = document.createElement("button");
 		removeButton.textContent = "Remove";
-		removeButton.addEventListener("click", () => {
-			cart.splice(index, 1);
-			refreshTable();
-		});
+		// removeButton.addEventListener("click", () => {
+		// 	cart.splice(index, 1);
+		// 	refreshTable();
+		// });
 		removeCell.appendChild(removeButton);
-		row.appendChild(removeCell);	
+		row.appendChild(removeCell);
 
 		// Append the row to the table
 		cartTableBody.appendChild(row);
+
+		// add footer
+		const cartTableFooter = document.querySelector("#cartTable tfoot");
+		cartTableFooter.innerHTML = tableFooter;
+
+		clearFields();
 	});
 }

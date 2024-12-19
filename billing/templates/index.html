@@ -25,6 +25,10 @@
 				<input type="text" name="address" id="address" placeholder=" " />
 				<span>Address</span>
 			</label>
+			<label for="gst">
+				<input type="number" name="gst" id="gst" placeholder=" " />
+				<span>IGST%</span>
+			</label>
 			<label for="dateField">
 				<input type="date" value="" name="date" id="dateField" placeholder=" " />
 				<span>Date</span>
@@ -43,12 +47,28 @@
 						<span>Price</span>
 					</label>
 					<label for="stockField">
-						<input autocomplete="off" type="text" id="stockField" placeholder=" " readonly />
+						<input autocomplete="off" type="text" id="stockField" placeholder=" " disabled />
 						<span>Stock</span>
 					</label>
 					<label for="stockCount">
 						<input autocomplete="off" type="text" id="stockCount" placeholder=" " />
-						<span>Count</span>
+						<span>Quantity</span>
+					</label>
+					<label for="actualAmount">
+						<input autocomplete="off" type="text" id="actualAmount" placeholder=" " disabled />
+						<span>Amount</span>
+					</label>
+					{% comment %} <label for="gstAmount">
+						<input autocomplete="off" type="text" id="gstAmount" placeholder=" " />
+						<span>GST Amount</span>
+					</label> {% endcomment %}
+					<label for="gstRate">
+						<input autocomplete="off" type="text" id="gstRate" placeholder=" " disabled />
+						<span>GST Rate</span>
+					</label>
+					<label for="total">
+						<input autocomplete="off" type="text" id="total" placeholder=" " disabled />
+						<span>Total</span>
 					</label>
 					<button type="button" onclick="addItem()">Add item</button>
 				</div>
@@ -87,7 +107,7 @@
 	</div>
 </div>
 
-<script src="{% static 'js/stock_check.js' %}"></script>
+<script src="{% static 'js/field_check.js' %}"></script>
 <script src="{% static 'js/fetch_user.js' %}"></script>
 <script src="{% static 'js/fetch_stock.js' %}"></script>
 
