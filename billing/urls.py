@@ -9,8 +9,5 @@ urlpatterns = [
     path('stocks/', views.StocksView.as_view(), name="stocks"),
     path('stocksearch/', views.StockSearchView.as_view(), name="stock_search"),
     path('customersearch/', views.CustomerSearchView.as_view(), name="customer_search"),
-    
-    
-    # path('pdf', views.PDFView.as_view(), name="pdf"),
-    # path('createpdf', views.createpdf.as_view(), name="createpdf"),
+
 ]

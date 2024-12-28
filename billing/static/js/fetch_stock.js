@@ -247,7 +247,7 @@ function refreshTable() {
 
 					<tr>
 						<td colspan="6">Grand Total Amount (₹): </td>
-						<td>${grandTotal}</td>
+						<td>${Math.round(grandTotal)}</td>
 					</tr>
 					`;
 			cartTableFooter.innerHTML = tableFooter;
