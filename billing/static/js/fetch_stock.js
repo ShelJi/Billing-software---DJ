@@ -10,6 +10,7 @@ const date = document.getElementById("dateField");
 const actualAmountTable = document.getElementById("actualAmount");
 const gstRateTable = document.getElementById("gstRate");
 const totalTable = document.getElementById("total");
+const indexValue = document.getElementById("indexValue");
 
 let products = [];
 let cart = [];
@@ -173,6 +174,11 @@ function refreshTable() {
 	const cartTableBody = document.querySelector("#cartTable tbody");
 	cartTableBody.innerHTML = "";
 
+	// console.log(indexValue.value);
+	// indexValue.value = cart.length;
+	// console.log(cart.length);
+	// console.log(indexValue.value);
+
 	cart.slice()
 		.reverse()
 		.forEach((item, index) => {
@@ -185,31 +191,37 @@ function refreshTable() {
 
 			// Product Name
 			const nameCell = document.createElement("td");
+			nameCell.setAttribute("name", `product${cart.length - index}`);
 			nameCell.textContent = item.product_name;
 			row.appendChild(nameCell);
 
 			// Price
 			const priceCell = document.createElement("td");
+			priceCell.setAttribute("name", `priceCell${cart.length - index}`);
 			priceCell.textContent = `Rs ${item.price}`;
 			row.appendChild(priceCell);
 
 			// Quantity
 			const quantityCell = document.createElement("td");
+			quantityCell.setAttribute("name", `quantityCell${cart.length - index}`);
 			quantityCell.textContent = item.quantity;
 			row.appendChild(quantityCell);
 
 			// Actual amount
 			const actualAmountCell = document.createElement("td");
+			actualAmountCell.setAttribute("name", `actualAmountCell${cart.length - index}`);
 			actualAmountCell.textContent = `Rs ${item.actualAmount}`;
 			row.appendChild(actualAmountCell);
 
 			// gstRateTable
 			const gstRateTableCell = document.createElement("td");
+			gstRateTableCell.setAttribute("name", `gstRateTableCell${cart.length - index}`);
 			gstRateTableCell.textContent = `Rs ${item.gstRate}`;
 			row.appendChild(gstRateTableCell);
 
 			// totalTable
 			const totalTableCell = document.createElement("td");
+			totalTableCell.setAttribute("name", `totalTableCell${cart.length - index}`);
 			totalTableCell.textContent = `Rs ${item.total}`;
 			row.appendChild(totalTableCell);
 

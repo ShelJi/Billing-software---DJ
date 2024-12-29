@@ -53,4 +53,4 @@ class CustomerSearchView(ListView):
             return JsonResponse(users, safe=False)
         return redirect("billing:index")
 
-
+# class 

@@ -1,0 +1,197 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="robots" content="noindex, nofollow" />
+		<link rel="icon" href="/static/assests/c-logo.png" type="image/x-icon" />
+		<title>Clovion</title>
+	</head>
+	<body>
+		<link rel="stylesheet" href="/static/css/index.css" />
+
+		<div class="container_body">
+			<div class="logo">
+				<img src="/static/assests/c-small-transparent.png" alt="Clovion" height="100px" />
+			</div>
+
+			<div class="details">
+				<div class="user_details">
+					<label for="phone_no">
+						<input
+							type="tel"
+							pattern="^\+?[0-9]*$"
+							name="phone_no"
+							id="phone_no"
+							placeholder=" "
+							autocomplete="off"
+						/>
+						<span>Phone Number</span>
+					</label>
+					<label for="username">
+						<input type="text" name="username" id="username" placeholder=" " />
+						<span>Username</span>
+					</label>
+					<label for="email">
+						<input type="email" name="email" id="email" placeholder=" " />
+						<span>Email</span>
+					</label>
+					<label for="address">
+						<input type="text" name="address" id="address" placeholder=" " />
+						<span>Address</span>
+					</label>
+					<label for="gst">
+						<input type="number" name="gst" id="gst" placeholder=" " />
+						<span>IGST%</span>
+					</label>
+					<label for="dateField">
+						<input type="date" value="" name="date" id="dateField" placeholder=" " />
+						<span>Date</span>
+					</label>
+					<input type="number" id="indexValue" hidden="" />
+				</div>
+				<div id="dropdownuser" class="dropdown" style="display: none"></div>
+
+				<div class="products">
+					<div class="search" id="search">
+						<div class="product-inputs">
+							<input type="number" value="" id="productID" name="id" hidden="" />
+							<input
+								type="text"
+								id="productSearch"
+								placeholder="Search for a product..."
+							/>
+							<label for="priceField">
+								<input
+									autocomplete="off"
+									type="text"
+									id="priceField"
+									placeholder=" "
+								/>
+								<span>Price</span>
+							</label>
+							<label for="stockField">
+								<input
+									autocomplete="off"
+									type="text"
+									id="stockField"
+									placeholder=" "
+									disabled=""
+								/>
+								<span>Stock</span>
+							</label>
+							<label for="stockCount">
+								<input
+									autocomplete="off"
+									type="text"
+									id="stockCount"
+									placeholder=" "
+								/>
+								<span>Quantity</span>
+							</label>
+							<label for="actualAmount">
+								<input
+									autocomplete="off"
+									type="text"
+									id="actualAmount"
+									placeholder=" "
+									disabled=""
+								/>
+								<span>Amount</span>
+							</label>
+							<label for="gstRate">
+								<input
+									autocomplete="off"
+									type="text"
+									id="gstRate"
+									placeholder=" "
+									disabled=""
+								/>
+								<span>GST Rate</span>
+							</label>
+							<label for="total">
+								<input
+									autocomplete="off"
+									type="text"
+									id="total"
+									placeholder=" "
+									disabled=""
+								/>
+								<span>Total</span>
+							</label>
+							<button type="button" onclick="addItem()">Add item</button>
+						</div>
+						<div id="dropdown" class="dropdown" style="display: none"></div>
+					</div>
+				</div>
+			</div>
+			<div class="cart">
+				<div class="table" id="table">
+					<table id="cartTable">
+						<thead>
+							<tr>
+								<th>S.No</th>
+								<th>Product Name</th>
+								<th>Price</th>
+								<th>Quantity</th>
+								<th>Actual Amount</th>
+								<th>GST Rate</th>
+								<th>Total</th>
+								<th>Remove</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr>
+								<td>2</td>
+								<td name="product2">Tomato</td>
+								<td name="priceCell2">Rs 100</td>
+								<td name="quantityCell2">1</td>
+								<td name="actualAmountCell2">Rs 100</td>
+								<td name="gstRateTableCell2">Rs 18</td>
+								<td name="totalTableCell2">Rs 118</td>
+								<td><button>Remove</button></td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td name="product1">Potato</td>
+								<td name="priceCell1">Rs 10</td>
+								<td name="quantityCell1">1</td>
+								<td name="actualAmountCell1">Rs 10</td>
+								<td name="gstRateTableCell1">Rs 1.8</td>
+								<td name="totalTableCell1">Rs 11.8</td>
+								<td><button>Remove</button></td>
+							</tr>
+						</tbody>
+
+						<tfoot>
+							<tr>
+								<td colspan="6">Total Quantity:</td>
+								<td>2</td>
+							</tr>
+
+							<tr>
+								<td colspan="6">Grand Total Amount Without GST (₹):</td>
+								<td>110</td>
+							</tr>
+
+							<tr>
+								<td colspan="6">Grand Total GST Amount (₹):</td>
+								<td>19.8</td>
+							</tr>
+
+							<tr>
+								<td colspan="6">Grand Total Amount (₹):</td>
+								<td>130</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<button id="checkout" style="display: block">Checkout</button>
+			</div>
+		</div>
+
+		<script src="/static/js/field_check.js"></script>
+		<script src="/static/js/fetch_user.js"></script>
+		<script src="/static/js/fetch_stock.js"></script>
+	</body>
+</html>
