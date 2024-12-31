@@ -1,10 +1,13 @@
 from django import forms
+from .models import CustomerModel
 
 
-# class SubmissionForm(forms.Form):
-#     phone_no
-#     username
-#     email
-#     address
-#     gst
-#     date
+class CustomerCreationForm(forms.ModelForm):
+    indexValue = forms.CharField()
+    date = forms.DateField()
+    igst = forms.IntegerField()
+    
+    class Meta:
+        model = CustomerModel
+        fields = ["igst","date","indexValue","username","email","address"]
+        

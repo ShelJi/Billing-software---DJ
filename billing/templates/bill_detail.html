@@ -1,0 +1,37 @@
+<!-- billing/templates/bill_detail.html -->
+{% extends 'base/base.html' %}
+
+{% block body %}
+    <h2>Bill ID: {{ bill.bill_id }} - Customer: {{ bill.customer }}</h2>
+    
+    <h3>Products in this Bill:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Actual Amount</th>
+                <th>GST Amount</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.product }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.actualamount }}</td>
+                    <td>{{ product.gstamount }}</td>
+                    <td>{{ product.totalamount }}</td>
+                    <td></td>    
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6">No products found for this bill.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

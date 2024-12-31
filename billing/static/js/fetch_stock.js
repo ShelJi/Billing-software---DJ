@@ -124,18 +124,18 @@ function addItem() {
 		cart.push({
 			productID: productID.value.trim(),
 			product_name: productName,
-			price: priceField.value.trim(),
-			quantity: stockCount.value.trim(),
-			actualAmount: actualAmountTable.value.trim(),
-			gstRate: gstRateTable.value.trim(),
-			total: totalTable.value.trim(),
+			price: Number(priceField.value.trim()).toFixed(2),
+			quantity: Number(stockCount.value.trim()),
+			actualAmount: Number(actualAmountTable.value.trim()).toFixed(2),
+			gstRate: Number(gstRateTable.value.trim()).toFixed(2),
+			total: Number(totalTable.value.trim()).toFixed(2),
 		});
 
-		totalQuantity += Number(stockCount.value.trim());
-		totalWithGST += Number(gstRateTable.value.trim());
-		totalWithoutGST += Number(actualAmountTable.value.trim());
+		totalQuantity += Number(Number(stockCount.value.trim()).toFixed(2));
+		totalWithGST += Number(Number(gstRateTable.value.trim()).toFixed(2));
+		totalWithoutGST += Number(Number(actualAmountTable.value.trim()).toFixed(2));
 		grandTotal += Number(totalTable.value.trim());
-		
+
 		refreshTable();
 	} else {
 		console.log("Fill all fields");
@@ -174,10 +174,7 @@ function refreshTable() {
 	const cartTableBody = document.querySelector("#cartTable tbody");
 	cartTableBody.innerHTML = "";
 
-	// console.log(indexValue.value);
-	// indexValue.value = cart.length;
-	// console.log(cart.length);
-	// console.log(indexValue.value);
+	indexValue.value = cart.length;
 
 	cart.slice()
 		.reverse()
@@ -191,44 +188,81 @@ function refreshTable() {
 
 			// Product Name
 			const nameCell = document.createElement("td");
-			nameCell.setAttribute("name", `product${cart.length - index}`);
 			nameCell.textContent = item.product_name;
+
+			const hiddeninputname = document.createElement("input");
+			hiddeninputname.type = "hidden";
+			hiddeninputname.value = item.product_name;
+			hiddeninputname.name = `product${cart.length - index}`;
+			nameCell.appendChild(hiddeninputname);
+
 			row.appendChild(nameCell);
 
 			// Price
 			const priceCell = document.createElement("td");
-			priceCell.setAttribute("name", `priceCell${cart.length - index}`);
 			priceCell.textContent = `Rs ${item.price}`;
+
+			const hiddeninputpriceCell = document.createElement("input");
+			hiddeninputpriceCell.type = "hidden";
+			hiddeninputpriceCell.value = item.price;
+			hiddeninputpriceCell.name = `price${cart.length - index}`;
+			priceCell.appendChild(hiddeninputpriceCell);
+
 			row.appendChild(priceCell);
 
 			// Quantity
 			const quantityCell = document.createElement("td");
-			quantityCell.setAttribute("name", `quantityCell${cart.length - index}`);
 			quantityCell.textContent = item.quantity;
+
+			const hiddeninputquantityCell = document.createElement("input");
+			hiddeninputquantityCell.type = "hidden";
+			hiddeninputquantityCell.value = item.quantity;
+			hiddeninputquantityCell.name = `quantity${cart.length - index}`;
+			quantityCell.appendChild(hiddeninputquantityCell);
+
 			row.appendChild(quantityCell);
 
 			// Actual amount
 			const actualAmountCell = document.createElement("td");
-			actualAmountCell.setAttribute("name", `actualAmountCell${cart.length - index}`);
 			actualAmountCell.textContent = `Rs ${item.actualAmount}`;
+
+			const hiddeninputactualAmountCell = document.createElement("input");
+			hiddeninputactualAmountCell.type = "hidden";
+			hiddeninputactualAmountCell.value = item.actualAmount;
+			hiddeninputactualAmountCell.name = `actualamount${cart.length - index}`;
+			actualAmountCell.appendChild(hiddeninputactualAmountCell);
+
 			row.appendChild(actualAmountCell);
 
 			// gstRateTable
 			const gstRateTableCell = document.createElement("td");
-			gstRateTableCell.setAttribute("name", `gstRateTableCell${cart.length - index}`);
 			gstRateTableCell.textContent = `Rs ${item.gstRate}`;
+
+			const hiddeninputgstRateTableCell = document.createElement("input");
+			hiddeninputgstRateTableCell.type = "hidden";
+			hiddeninputgstRateTableCell.value = item.gstRate;
+			hiddeninputgstRateTableCell.name = `gstamount${cart.length - index}`;
+			gstRateTableCell.appendChild(hiddeninputgstRateTableCell);
+
 			row.appendChild(gstRateTableCell);
 
 			// totalTable
 			const totalTableCell = document.createElement("td");
-			totalTableCell.setAttribute("name", `totalTableCell${cart.length - index}`);
 			totalTableCell.textContent = `Rs ${item.total}`;
+
+			const hiddeninputtotalTableCell = document.createElement("input");
+			hiddeninputtotalTableCell.type = "hidden";
+			hiddeninputtotalTableCell.value = item.total;
+			hiddeninputtotalTableCell.name = `totalamount${cart.length - index}`;
+			totalTableCell.appendChild(hiddeninputtotalTableCell);
+
 			row.appendChild(totalTableCell);
 
 			// remove
 			const removeCell = document.createElement("td");
 			const removeButton = document.createElement("button");
 			removeButton.textContent = "Remove";
+			removeButton.setAttribute("type", "button");
 			// removeButton.addEventListener("click", () => {
 			// 	cart.splice(index, 1);
 			// 	refreshTable();

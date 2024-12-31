@@ -1,128 +1,87 @@
-{% extends 'base/base.html' %} {% block body %}
-<link rel="stylesheet" href="/static/css/index.css" />
+{% extends 'base/base.html' %} {% load static %} {% block body %}
+  <link rel="stylesheet" href="{% static 'css/index.css' %}" />
 
-<div class="container_body">
-	<div class="logo">
-		<img src="/static/assests/c-small-transparent.png" alt="Clovion" height="100px" />
-	</div>
+  <div class="container_body">
+    <div class="logo">
+      <img src="{% static 'assests/c-small-transparent.png' %}" alt="Clovion" height="100px" />
+    </div>
 
-	<form action="" method="post">
-		{% csrf_token %}
+    <form action="{% url 'billing:save_bill' %}" method="post">
+      {% csrf_token %}
 
-		<div class="details">
-			<div class="user_details">
-				<label for="phone_no">
-					<input
-						type="tel"
-						pattern="^\+?[0-9]*$"
-						name="phone_no"
-						id="phone_no"
-						placeholder=" "
-						autocomplete="off"
-					/>
-					<span>Phone Number</span>
-				</label>
-				<label for="username">
-					<input type="text" name="username" id="username" placeholder=" " />
-					<span>Username</span>
-				</label>
-				<label for="email">
-					<input type="email" name="email" id="email" placeholder=" " />
-					<span>Email</span>
-				</label>
-				<label for="address">
-					<input type="text" name="address" id="address" placeholder=" " />
-					<span>Address</span>
-				</label>
-				<label for="gst">
-					<input type="number" name="gst" id="gst" placeholder=" " />
-					<span>IGST%</span>
-				</label>
-				<label for="dateField">
-					<input type="date" value="" name="date" id="dateField" placeholder=" " />
-					<span>Date</span>
-				</label>
-				<input type="text" id="indexValue" name="indexValue" hidden="" />
-			</div>
-			<div id="dropdownuser" class="dropdown" style="display: none"></div>
+      <div class="details">
+        <div class="user_details">
+          <label for="phone_no">
+            <input type="tel" pattern="^\+?[0-9]*$" name="phone_no" id="phone_no" placeholder=" " autocomplete="off" />
+            <span>Phone Number</span>
+          </label>
+          <label for="username">
+            <input type="text" name="username" id="username" placeholder=" " />
+            <span>Username</span>
+          </label>
+          <label for="email">
+            <input type="email" name="email" id="email" placeholder=" " />
+            <span>Email</span>
+          </label>
+          <label for="address">
+            <input type="text" name="address" id="address" placeholder=" " />
+            <span>Address</span>
+          </label>
+          <label for="gst">
+            <input type="number" name="igst" id="gst" placeholder=" " />
+            <span>IGST%</span>
+          </label>
+          <label for="dateField">
+            <input type="date" value="" name="date" id="dateField" placeholder=" " />
+            <span>Date</span>
+          </label>
+          <input type="hidden" id="indexValue" name="indexValue" value="" />
+        </div>
+        <div id="dropdownuser" class="dropdown" style="display: none"></div>
 
-			<div class="products">
-				<div class="search" id="search">
-					<div class="product-inputs">
-						<input type="number" value="" id="productID" name="id" hidden="" />
-						<input
-							type="text"
-							id="productSearch"
-							placeholder="Search for a product..."
-						/>
-						<label for="priceField">
-							<input autocomplete="off" type="text" id="priceField" placeholder=" " />
-							<span>Price</span>
-						</label>
-						<label for="stockField">
-							<input
-								autocomplete="off"
-								type="text"
-								id="stockField"
-								placeholder=" "
-								disabled=""
-							/>
-							<span>Stock</span>
-						</label>
-						<label for="stockCount">
-							<input
-								autocomplete="off"
-								type="number"
-								id="stockCount"
-								placeholder=" "
-							/>
-							<span>Quantity</span>
-						</label>
-						<label for="actualAmount">
-							<input
-								autocomplete="off"
-								type="text"
-								id="actualAmount"
-								placeholder=" "
-								disabled=""
-							/>
-							<span>Amount</span>
-						</label>
-						<label for="gstRate">
-							<input
-								autocomplete="off"
-								type="text"
-								id="gstRate"
-								placeholder=" "
-								disabled=""
-							/>
-							<span>GST Rate</span>
-						</label>
-						<label for="total">
-							<input
-								autocomplete="off"
-								type="text"
-								id="total"
-								placeholder=" "
-								disabled=""
-							/>
-							<span>Total</span>
-						</label>
-						<button type="button" onclick="addItem()">Add item</button>
-					</div>
-					<div id="dropdown" class="dropdown" style="display: none"></div>
-				</div>
-			</div>
-		</div>
-		<div class="cart">
-			<div class="table" id="table"></div>
-			<button id="checkout">Checkout</button>
-		</div>
-	</form>
-</div>
+        <div class="products">
+          <div class="search" id="search">
+            <div class="product-inputs">
+              <input type="number" value="" id="productID" name="id" hidden="" />
+              <input type="text" id="productSearch" placeholder="Search for a product..." />
+              <label for="priceField">
+                <input autocomplete="off" type="text" id="priceField" placeholder=" " />
+                <span>Price</span>
+              </label>
+              <label for="stockField">
+                <input autocomplete="off" type="text" id="stockField" placeholder=" " disabled="" />
+                <span>Stock</span>
+              </label>
+              <label for="stockCount">
+                <input autocomplete="off" type="number" id="stockCount" placeholder=" " />
+                <span>Quantity</span>
+              </label>
+              <label for="actualAmount">
+                <input autocomplete="off" type="text" id="actualAmount" placeholder=" " disabled="" />
+                <span>Amount</span>
+              </label>
+              <label for="gstRate">
+                <input autocomplete="off" type="text" id="gstRate" placeholder=" " disabled="" />
+                <span>GST Rate</span>
+              </label>
+              <label for="total">
+                <input autocomplete="off" type="text" id="total" placeholder=" " disabled="" />
+                <span>Total</span>
+              </label>
+              <button type="button" onclick="addItem()">Add item</button>
+            </div>
+            <div id="dropdown" class="dropdown" style="display: none"></div>
+          </div>
+        </div>
+      </div>
+      <div class="cart">
+        <div class="table" id="table"></div>
+        <button id="checkout">Checkout</button>
+      </div>
+    </form>
+  </div>
 
-<script src="/static/js/field_check.js"></script>
-<script src="/static/js/fetch_user.js"></script>
-<script src="/static/js/fetch_stock.js"></script>
-
-{% endblock body %}
+  <script src="{% static 'js/field_check.js' %}"></script>
+  <script src="{% static 'js/fetch_user.js' %}"></script>
+  <script src="{% static 'js/fetch_stock.js' %}"></script>
+{% endblock %}
