@@ -24,9 +24,9 @@ const tableHead = `
     <thead>
         <tr>
             <th>S.No</th>
-            <th>Product Name</th>
+            <th>Paper type</th>
             <th>Price</th>
-            <th>Quantity</th>
+            <th>Copies</th>
             <th>Actual Amount</th>
             <th>GST Rate</th>
             <th>Total</th>
@@ -277,7 +277,7 @@ function refreshTable() {
 			const cartTableFooter = document.querySelector("#cartTable tfoot");
 			const tableFooter = `
 					<tr>
-						<td colspan="6" >Total Quantity: </td>
+						<td colspan="6" >Total Copies: </td>
 						<td>${totalQuantity}</td>
 					</tr>
 

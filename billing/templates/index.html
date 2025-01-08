@@ -3,7 +3,7 @@
 
   <div class="container_body">
     <div class="logo">
-      <img src="{% static 'assests/c-small-transparent.png' %}" alt="Clovion" height="100px" />
+      <h1>GALAXY PRINTERS</h1>
     </div>
 
     <form action="{% url 'billing:save_bill' %}" method="post">
@@ -50,11 +50,11 @@
               </label>
               <label for="stockField">
                 <input autocomplete="off" type="text" id="stockField" placeholder=" " disabled="" />
-                <span>Stock</span>
+                <span>Available</span>
               </label>
               <label for="stockCount">
                 <input autocomplete="off" type="number" id="stockCount" placeholder=" " />
-                <span>Quantity</span>
+                <span>Copies</span>
               </label>
               <label for="actualAmount">
                 <input autocomplete="off" type="text" id="actualAmount" placeholder=" " disabled="" />

@@ -1,45 +1,144 @@
-<!-- billing/templates/bills.html -->
-{% extends 'base/base.html' %}
+{% extends 'base/base.html' %} {% block body %}
+<style>
+	body {
+		font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		background-color: #f8f9fa;
+		margin: 20px;
+		color: #343a40;
+	}
 
-{% block body %}
-    <h2>All Bills</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Bill ID</th>
-                <th>Customer</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for bill in bills %}
-                <tr>
-                    <td><a href="{% url 'billing:detailed_bill' bill.bill_id %}">{{ bill.bill_id }}</a></td>
-                    <td>{{ bill.customer }}</td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="2">No bills found.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+	h2 {
+		text-align: center;
+		color: #495057;
+		margin-bottom: 20px;
+		font-size: 1.8em;
+		border-bottom: 2px solid #6c757d;
+		display: inline-block;
+		padding-bottom: 5px;
+	}
 
-    <!-- Pagination -->
-    <div class="pagination">
-        <span class="step-links">
-            {% if bills.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ bills.previous_page_number }}">previous</a>
-            {% endif %}
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 20px auto;
+		background-color: #fff;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		border-radius: 8px;
+		overflow: hidden;
+	}
 
-            <span class="current">
-                Page {{ bills.number }} of {{ bills.paginator.num_pages }}.
-            </span>
+	table th,
+	table td {
+		padding: 12px 15px;
+		text-align: left;
+	}
 
-            {% if bills.has_next %}
-                <a href="?page={{ bills.next_page_number }}">next</a>
-                <a href="?page={{ bills.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
+	table th {
+		background-color: #343a40;
+		color: #fff;
+		font-weight: bold;
+	}
+
+	table tbody tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+
+	table tbody tr:hover {
+		background-color: #e9ecef;
+		cursor: pointer;
+	}
+
+	table tbody td a {
+		color: #007bff;
+		text-decoration: none;
+	}
+
+	table tbody td a:hover {
+		text-decoration: underline;
+	}
+
+	td[colspan="2"] {
+		text-align: center;
+		font-style: italic;
+		color: #868e96;
+		background-color: #f8f9fa;
+	}
+
+	.pagination {
+		text-align: center;
+		margin: 20px auto;
+	}
+
+	.pagination .step-links {
+		display: inline-block;
+	}
+
+	.pagination a {
+		color: #007bff;
+		text-decoration: none;
+		padding: 5px 10px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		margin: 0 5px;
+	}
+
+	.pagination a:hover {
+		background-color: #007bff;
+		color: #fff;
+	}
+
+	.pagination .current {
+		margin: 0 5px;
+		padding: 5px 10px;
+		background-color: #343a40;
+		color: #fff;
+		border-radius: 4px;
+	}
+</style>
+
+<h2>All Bills</h2>
+<h5></h5>
+<table>
+	<thead>
+		<tr>
+			<th>Bill ID</th>
+			<th>Customer</th>
+			<th>Download</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for bill in bills %}
+		<tr>
+			<td><a href="{% url 'billing:detailed_bill' bill.bill_id %}">{{ bill.bill_id }}</a></td>
+			<td>{{ bill.customer }}</td>
+			<td>
+				<a href="{% url "billing:pdf_bill" bill.bill_id %}">
+					<button>download bill</button>
+				</a>
+			</td>
+		</tr>
+		{% empty %}
+		<tr>
+			<td colspan="2">No bills found.</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<!-- Pagination -->
+<div class="pagination">
+	<span class="step-links">
+		{% if bills.has_previous %}
+		<a href="?page=1">&laquo; first</a>
+		<a href="?page={{ bills.previous_page_number }}">previous</a>
+		{% endif %}
+
+		<span class="current"> Page {{ bills.number }} of {{ bills.paginator.num_pages }}. </span>
+
+		{% if bills.has_next %}
+		<a href="?page={{ bills.next_page_number }}">next</a>
+		<a href="?page={{ bills.paginator.num_pages }}">last &raquo;</a>
+		{% endif %}
+	</span>
+</div>
 {% endblock %}

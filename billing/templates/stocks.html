@@ -1,18 +1,60 @@
-{% extends 'base/base.html' %}
-{% block body %}
+{% extends 'base/base.html' %} {% block body %}
+<style>
+	body {
+		font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		background-color: #f8f9fa;
+		margin: 20px;
+		color: #343a40;
+	}
 
-    {% for object in object_list %}
-    {{ object.product_name }}
-    {{ object.product_description }}
-    {{ object.product_stock }}
-    {{ object.product_prize }}
-    {{ object.product_created_at }}
-    {{ object.product_updated_at }}
-    <br>
-    {% empty %}
-    <h1>No stocks availble</h1>
-    {% endfor %}
+	h1 {
+		text-align: center;
+		color: #495057;
+		font-size: 2em;
+		margin: 40px 0;
+	}
 
+	.stock-item {
+		background-color: #fff;
+		margin: 20px auto;
+		padding: 15px 20px;
+		border-radius: 8px;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		width: 90%;
+		max-width: 800px;
+	}
 
+	.stock-item h2 {
+		font-size: 1.5em;
+		color: #007bff;
+		margin-bottom: 10px;
+	}
 
-{% endblock body %}
+	.stock-item p {
+		margin: 5px 0;
+		color: #495057;
+	}
+
+	.stock-item p span {
+		font-weight: bold;
+		color: #343a40;
+	}
+
+	.no-stock {
+		text-align: center;
+		font-style: italic;
+		color: #868e96;
+	}
+</style>
+{% for object in object_list %}
+<div class="stock-item">
+	<h2>{{ object.product_name }}</h2>
+	<p><span>Description:</span> {{ object.product_description }}</p>
+	<p><span>Stock:</span> {{ object.product_stock }}</p>
+	<p><span>Price:</span> {{ object.product_prize }}</p>
+	<p><span>Created At:</span> {{ object.product_created_at }}</p>
+	<p><span>Updated At:</span> {{ object.product_updated_at }}</p>
+</div>
+{% empty %}
+<h1 class="no-stock">No stocks available</h1>
+{% endfor %} {% endblock %}
